@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // Le RequireComponent ajoute le component sur l'objet s'il n'y est pas à l'ajout du script.
 [RequireComponent(typeof(Rigidbody))]
@@ -38,11 +39,25 @@ public class PlayerController : MonoBehaviour
     public bool m_GravUpEnabled = false;
     public bool m_GravSidesEnabled = false;
 
+    public Text m_VerticalPowerText;
+    public Text m_VerticalHoverText1;
+    public Text m_VerticalHoverText2;
+    public Text m_CancelGravText;
+    public Text m_HoverText;
+    public Text m_BossText;
+
 
     private void Awake()
     {
         // On initialise les variables
         m_Rigidbody = GetComponent<Rigidbody>();
+
+        m_VerticalPowerText.enabled = false;
+        m_VerticalHoverText1.enabled = false;
+        m_VerticalHoverText2.enabled = false;
+        m_CancelGravText.enabled = false;
+        m_HoverText.enabled = false;
+        m_BossText.enabled = false;
     }
 
 
@@ -104,6 +119,7 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
 
+        // enables side gravity
         if (m_GravSidesEnabled)
         {
             if (Input.GetMouseButtonDown(0))
@@ -218,6 +234,21 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.Lerp((transform.rotation), Quaternion.LookRotation(m_LookRotation), m_RotateSpeed * Time.deltaTime);
             }
         }        
+    }
+
+    public void ResetVelocity()
+    {
+        m_RightGravity = false;
+        m_LeftGravity = false;
+        m_Rigidbody.velocity = Vector3.zero;
+        m_IsVertical = false;
+    }
+
+    public void SwitchGravity()
+    {
+        m_FakeGravity = -m_FakeGravity;
+        m_RightGravity = ! m_RightGravity;
+        m_LeftGravity = !m_LeftGravity;
     }
 
 
