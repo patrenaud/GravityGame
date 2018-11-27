@@ -35,10 +35,16 @@ public class PlayerController : MonoBehaviour
     // Components
     private Rigidbody m_Rigidbody;
 
+    // Feedback
+    private Color m_CurrentColor;
+
+
+    // Gravity triggers
     public bool m_IsInPlatforms = false;
     public bool m_GravUpEnabled = false;
     public bool m_GravSidesEnabled = false;
 
+    // Explaining texts
     public Text m_VerticalPowerText;
     public Text m_VerticalHoverText1;
     public Text m_VerticalHoverText2;
@@ -58,6 +64,8 @@ public class PlayerController : MonoBehaviour
         m_CancelGravText.enabled = false;
         m_HoverText.enabled = false;
         m_BossText.enabled = false;
+
+        m_CurrentColor = GetComponent<Renderer>().material.color;
     }
 
 
@@ -249,6 +257,16 @@ public class PlayerController : MonoBehaviour
         m_FakeGravity = -m_FakeGravity;
         m_RightGravity = ! m_RightGravity;
         m_LeftGravity = !m_LeftGravity;
+
+        // Feedback to SwitchGravity
+        GetComponent<Renderer>().material.color = Color.red;
+        StartCoroutine(ReturnToNormalColor());
+    }
+
+    private IEnumerator ReturnToNormalColor()
+    {
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<Renderer>().material.color = m_CurrentColor;
     }
 
 

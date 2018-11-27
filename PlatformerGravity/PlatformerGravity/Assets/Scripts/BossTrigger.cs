@@ -9,19 +9,32 @@ public class BossTrigger : MonoBehaviour
 
 	[SerializeField]
 	private GameObject m_Player;
+    [SerializeField]
+    private GameObject m_Boss;
 	private bool m_PowerActivated;
 	private float m_Time;
 
+    private Vector3 m_CurrentScale;
+
+    private void Start()
+    {
+        m_Boss.GetComponent<Transform>().localScale = m_CurrentScale;
+    }
 
 	private void Update()
 	{
+        m_Boss.GetComponent<Transform>().localScale -= new Vector3(0.01f, 0.01f, 0.01f);
+
 		if(m_PowerActivated)
 		{
 			m_Time += Time.deltaTime;
 			if(m_Time >= 5.0f)
 			{
-				
-			}
+                m_Player.GetComponent<PlayerController>().SwitchGravity();
+                m_Time = 0f;
+                m_Boss.GetComponent<Transform>().localScale = m_CurrentScale;
+
+            }
 		}
 	}
 

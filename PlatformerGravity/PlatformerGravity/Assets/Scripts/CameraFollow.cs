@@ -26,7 +26,7 @@ public class CameraFollow : MonoBehaviour
         {
             m_Offset.z = m_Player.transform.position.z - transform.position.z;
             m_Offset.x = m_Player.transform.position.x - transform.position.x;
-            m_Offset.y = 0;
+            m_Offset.y = m_Player.transform.position.y - transform.position.y;
         }
     }
 	
@@ -39,7 +39,7 @@ public class CameraFollow : MonoBehaviour
         }
         else
         {
-            transform.position = new Vector3(m_Player.transform.position.x, transform.position.y, m_Player.transform.position.z - m_Offset.z);
+            transform.position = new Vector3(m_Player.transform.position.x, m_Player.transform.position.y - m_Offset.y, m_Player.transform.position.z - m_Offset.z);
         }
         
 	}
