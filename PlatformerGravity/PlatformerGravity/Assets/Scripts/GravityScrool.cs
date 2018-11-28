@@ -5,6 +5,8 @@ using UnityEngine;
 public class GravityScrool : MonoBehaviour
 {
 
+    public GameObject Enemy;
+
     private void OnTriggerEnter(Collider aOther)
     {
         aOther.gameObject.GetComponent<PlayerController>().m_GravUpEnabled = true;

@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour
     public Text m_HoverText;
     public Text m_BossText;
 
-
     private void Awake()
     {
         // On initialise les variables
@@ -127,12 +126,11 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
 
-        // enables side gravity
+         // enables side gravity
         if (m_GravSidesEnabled)
         {
             if (Input.GetMouseButtonDown(0))
             {
-
                 if (m_RightGravity)
                 {
                     m_RightGravity = false;
@@ -149,17 +147,19 @@ public class PlayerController : MonoBehaviour
                 }
                 m_RightGravity = !m_RightGravity;
             }
-        }        
+        }   
 
 
         // switch vertical gravity
-        if (Input.GetKeyDown(KeyCode.E) && m_Rigidbody.velocity.y != 0f)
+        if (Input.GetKeyDown(KeyCode.E) && m_Rigidbody.velocity.y != 0f && !m_RightGravity && !m_LeftGravity)
         {
             if (m_GravUpEnabled)
             {
                 m_FakeGravity = -m_FakeGravity;
             }
         }
+        
+
 
         UpdateRotation();
     }
@@ -255,8 +255,6 @@ public class PlayerController : MonoBehaviour
     public void SwitchGravity()
     {
         m_FakeGravity = -m_FakeGravity;
-        m_RightGravity = ! m_RightGravity;
-        m_LeftGravity = !m_LeftGravity;
 
         // Feedback to SwitchGravity
         GetComponent<Renderer>().material.color = Color.red;

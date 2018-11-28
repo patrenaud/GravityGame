@@ -14,16 +14,15 @@ public class BossTrigger : MonoBehaviour
 	private bool m_PowerActivated;
 	private float m_Time;
 
-    private Vector3 m_CurrentScale;
 
     private void Start()
     {
-        m_Boss.GetComponent<Transform>().localScale = m_CurrentScale;
+        
     }
 
 	private void Update()
 	{
-        m_Boss.GetComponent<Transform>().localScale -= new Vector3(0.01f, 0.01f, 0.01f);
+        
 
 		if(m_PowerActivated)
 		{
@@ -32,8 +31,7 @@ public class BossTrigger : MonoBehaviour
 			{
                 m_Player.GetComponent<PlayerController>().SwitchGravity();
                 m_Time = 0f;
-                m_Boss.GetComponent<Transform>().localScale = m_CurrentScale;
-
+                
             }
 		}
 	}
